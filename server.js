@@ -2,9 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import authRouter from "./routers/authRouter.js";
-import accountRouter from "./routers/accountRouter.js";
-import transactionRouter from "./routers/transactionRouter.js";
+import authRouter from "./routes/authRouter.js";
+import accountRouter from "./routes/accountRouter.js";
+import transactionRouter from "./routes/transactionRouter.js";
 
 dotenv.config();
 const app = express();
