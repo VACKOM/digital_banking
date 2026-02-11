@@ -1,5 +1,4 @@
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
 
 // Define the user schema
 const UserSchema = new mongoose.Schema(
@@ -27,8 +26,8 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin', 'support'],
-      default: 'user',
+      enum: ["user", "admin", "customer"],
+      default: "user",
     },
     isVerified: {
       type: Boolean,
@@ -36,8 +35,8 @@ const UserSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['active', 'suspended', 'deactivated'],
-      default: 'active',
+      enum: ["active", "suspended", "deactivated"],
+      default: "active",
     },
     customerId: {
       type: String,
@@ -47,14 +46,12 @@ const UserSchema = new mongoose.Schema(
     lastLogin: {
       type: Date,
     },
-   
   },
   {
     timestamps: true,
   }
 );
 
-
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 export default User;

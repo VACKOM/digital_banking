@@ -30,7 +30,6 @@ A secure RESTful API built with Node.js, Express, and MongoDB to handle:
 ├── .env # Environment variables (not committed)
 └── README.md # Documentation
 
-
 ---
 
 ## ⚙️ Setup Instructions
@@ -69,7 +68,7 @@ POST /api/auth/register
   "fullName": "Vida Ackom",
   "email": "vida@example.com",
   "phone": "0241234567",
-  "role": "customer",
+  "role": "user",
   "password": "12345678"
 }
 🔐 Login
@@ -92,7 +91,7 @@ GET	/api/accounts	Get user accounts
 json
 Copy
 Edit
-POST /api/accounts
+POST /api/account
 Headers: Authorization: Bearer <token>
 {
   "accountType": "savings",
@@ -103,8 +102,8 @@ Headers: Authorization: Bearer <token>
 
 💸 Transaction Endpoints
 Method	Endpoint	Description
-POST	/api/transactions	Create a transaction
-GET	/api/transactions	List user transactions
+POST	/api/transactions -	Create a transaction
+GET	/api/transactions - 	List user transactions
 
 💰 Create Transaction
 json
@@ -171,3 +170,4 @@ This project is licensed under the MIT License
 Vida Ackom
 Ghana | 🇬🇭
 
+```
