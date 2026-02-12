@@ -1,173 +1,161 @@
-# 💳 Banking API
+# 💳 Digital Banking API
 
-A secure RESTful API built with Node.js, Express, and MongoDB to handle:
-
-- User registration and login
-- Bank account creation
-- Transactions (transfer, payment, deposit, withdrawal)
-- JWT authentication
+A secure RESTful backend API built with **Node.js, Express, and MongoDB** to simulate core digital banking operations including authentication, account management, and financial transactions.
 
 ---
 
-## 🚀 Features
+## 🚀 TL;DR
 
-- ✅ Secure password hashing with bcrypt
-- ✅ User authentication with JWT
-- ✅ Account creation with auto-generated account numbers
-- ✅ Transactions between accounts
-- ✅ Middleware-based token verification
-- ✅ MongoDB via Mongoose ODM
+- **Tech Stack:** Node.js, Express, MongoDB
+- **Authentication:** JWT (Bearer Token)
+- **Live API:** https://your-render-link.onrender.com
+- **Base URL (Local):** http://localhost:5000
+
+---
+
+## ✨ Features
+
+- Secure password hashing with **bcrypt**
+- JWT-based authentication
+- Role-based access control
+- Auto-generated bank account numbers
+- Secure fund transfers between accounts
+- Automatic debit and credit logic
+- Middleware-based route protection
+- MongoDB integration via Mongoose ODM
+
+---
+
+## 🛠 Tech Stack
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
+- dotenv
 
 ---
 
 ## 📁 Project Structure
 
-├── controllers/ # Route logic (users, accounts, transactions)
-├── models/ # Mongoose models
+├── controllers/ # Route logic
+├── models/ # Mongoose schemas
 ├── routes/ # Express route definitions
 ├── middleware/ # Authentication middleware
 ├── server.js # Entry point
-├── .env # Environment variables (not committed)
-└── README.md # Documentation
+├── postman_collection.json
+└── README.md
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone the repository
+### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/banking-api.git
-cd banking-api
+git clone https://github.com/VACKOM/digital_banking.git
+cd digital_banking
 
-### 2. Install dependencies
+```
+
+2️⃣ Install dependencies
 npm install
 
-### 3. Create .env file
+3️⃣ Create a .env file
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/bankingdb
-JWT_SECRET=your_jwt_secret_key
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
 
-### 4. Run the server
-npm run dev
-The server runs on:
-http://localhost:5000
+▶️ Run the Application
 
-🧪 API Endpoints
-🔐 Auth Endpoints
-Method	Endpoint	Description
-POST	/api/auth/register	Register a user
-POST	/api/auth/login	Login and get token
+- Development
+  npm run dev
+- Production
+  npm start
 
-🔐 Register
-json
-Copy
-Edit
-POST /api/auth/register
-{
+  Server runs on:
+
+- https://digital-banking-api.onrender.com
+- http://localhost:5000
+
+🔐 Authentication
+Protected routes require:
+Authorization: Bearer <token>
+The JWT token is returned upon successful login.
+
+📌 API Endpoints
+🔐 Authentication
+Method - Endpoint - Description
+POST - /api/auth/register - Register a new user
+POST - /api/auth/login - Login user
+
+💼 Accounts
+Method - Endpoint - Description
+POST - /api/account - Create bank account
+GET - /api/account - Get user accounts
+
+💸 Transactions
+Method - Endpoint - Description
+POST - /api/transaction - Create transaction
+GET - /api/transaction - List user transactions
+
+🧪 Sample Request
+
+- Register User
+  POST /api/auth/register
+  {
   "fullName": "Vida Ackom",
   "email": "vida@example.com",
-  "phone": "0241234567",
+  "phone": "0241234599",
   "role": "user",
   "password": "12345678"
-}
-🔐 Login
-json
-Copy
-Edit
-POST /api/auth/login
-{
-  "email": "vida@example.com",
-  "password": "12345678"
-}
-Response includes a JWT token in cookies or headers.
+  }
 
-💼 Account Endpoints
-Method	Endpoint	Description
-POST	/api/accounts	Create bank account
-GET	/api/accounts	Get user accounts
-
-🏦 Create Account
-json
-Copy
-Edit
-POST /api/account
-Headers: Authorization: Bearer <token>
-{
-  "accountType": "savings",
-  "balance": 1000,
-  "status": "active"
-}
-✅ The accountNumber is auto-generated.
-
-💸 Transaction Endpoints
-Method	Endpoint	Description
-POST	/api/transactions -	Create a transaction
-GET	/api/transactions - 	List user transactions
-
-💰 Create Transaction
-json
-Copy
-Edit
-POST /api/transactions
-Headers: Authorization: Bearer <token>
-{
+- Create Transaction
+  POST /api/transaction
+  {
   "type": "transfer",
   "amount": 500,
   "currency": "GHS",
   "description": "Sending to mom",
-  "senderAccount": "64f72bd2781d7b2856b398d7",
-  "receiverAccount": "64f72bd2781d7b2856b398a1"
-}
-✅ Automatically debits sender and credits receiver.
-
-🔐 JWT Authentication
-Middleware: auth.js
-
-js
-Copy
-Edit
-import jwt from 'jsonwebtoken';
-
-const auth = (req, res, next) => {
-  const token = req.cookies?.token || req.headers.authorization?.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
+  "senderAccount": "account_id",
+  "receiverAccount": "account_id"
   }
+  ✔ Automatically debits sender and credits receiver.
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (err) {
-    return res.status(401).json({ message: 'Invalid Token' });
-  }
-};
+📬 API Documentation (Postman)
+A Postman collection is included for easy testing.
 
-export default auth;
-📦 Sample .env
-env
-Copy
-Edit
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/bankingdb
-JWT_SECRET=your_jwt_secret
-✅ .gitignore
-gitignore
-Copy
-Edit
-node_modules
-.env
-*.log
-👩‍💻 Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+- Import Steps
 
-📜 License
-This project is licensed under the MIT License
+1. Download postman_collection.json
+2. Open Postman → Import
+3. Select the file
+4. Update the collection variable baseUrl:
+   - Local: http://localhost:5000
+   - Production: https://digital-banking-api.onrender.com
 
-📝 Author
-Vida Ackom
-Ghana | 🇬🇭
+Authentication in Postman
 
-```
+1. Run Login
+2. The JWT token is saved automatically to {{token}}
+3. Protected requests use:Authorization: Bearer {{token}}
+
+🔒 Security
+
+- Password hashing with bcrypt
+- JWT verification middleware
+- Protected route enforcement
+- Environment variables secured via .env
+- .env excluded via .gitignore
+
+  📜 License
+  MIT License
+
+  👤 Author
+  Vida Anima Ackom
+  Backend Developer (Node.js)
+  Ghana 🇬🇭
+  GitHub: https://github.com/VACKOM
